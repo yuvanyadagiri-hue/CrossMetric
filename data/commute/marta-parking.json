@@ -1,0 +1,46 @@
+{
+  "description": "MARTA rail station parking, hand-verified from MARTA's official pages. Used only for 'drive to a MARTA station, then ride' options. Station ids are GTFS parent stations in the MARTA feed (data/published/commute/transit-gt.json). Space availability is never known; only whether the station has parking and what it costs.",
+  "retrieved": "2026-10-13",
+  "reviewBy": "2026-11-12",
+  "sources": {
+    "marta-parking-availability": {
+      "title": "MARTA — Parking availability (rail stations)",
+      "url": "https://itsmarta.com/parking-availability.aspx",
+      "kind": "official"
+    },
+    "marta-long-term-rates": {
+      "title": "MARTA increases long-term parking rates (press release, Aug 20, 2026)",
+      "url": "https://itsmarta.com/marta-increase-long-term-parking-rates.aspx",
+      "kind": "official"
+    }
+  },
+  "rules": {
+    "freeDaily": "Free daily parking at the stations listed with freeDaily: true.",
+    "paidFacilities": "From Sept 14, 2026, paid long-term facilities are free for the first 14 hours, then charge the station's daily rate."
+  },
+  "paidFreeHours": 14,
+  "stations": [
+    { "id": "marta:510028", "name": "North Springs", "freeDaily": true, "longTermDaily": 10, "note": "Exit the same way you came in; two parking decks." },
+    { "id": "marta:510030", "name": "Sandy Springs", "freeDaily": true, "longTermDaily": 7 },
+    { "id": "marta:510011", "name": "Dunwoody", "freeDaily": true, "longTermDaily": 7 },
+    { "id": "marta:510025", "name": "Medical Center", "freeDaily": true, "longTermDaily": 7 },
+    { "id": "marta:510024", "name": "Lindbergh Center", "freeDaily": true, "longTermDaily": 10, "note": "Parking is behind MARTA Headquarters (off Sidney Marcus Blvd)." },
+    { "id": "marta:510033", "name": "West End", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510029", "name": "Oakland City", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510022", "name": "Lakewood/Ft. McPherson", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510013", "name": "East Point", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510008", "name": "College Park", "freeDaily": true, "longTermDaily": 10 },
+    { "id": "marta:510010", "name": "Doraville", "freeDaily": true, "longTermDaily": 10 },
+    { "id": "marta:510006", "name": "Chamblee", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510023", "name": "Lenox", "freeDaily": true, "longTermDaily": 7 },
+    { "id": "marta:510017", "name": "Hamilton E. Holmes", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510034", "name": "West Lake", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510019", "name": "Inman Park/Reynoldstown", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510014", "name": "Edgewood/Candler Park", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510012", "name": "East Lake", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510003", "name": "Avondale", "freeDaily": true, "longTermDaily": null },
+    { "id": "marta:510020", "name": "Kensington", "freeDaily": true, "longTermDaily": 7 },
+    { "id": "marta:510018", "name": "Indian Creek", "freeDaily": true, "longTermDaily": null }
+  ],
+  "notListed": "Brookhaven/Oglethorpe parking is marked temporarily unavailable. Stations without parking (e.g. Five Points, Buckhead, Arts Center, Midtown, North Avenue, Airport) are never used as park-and-ride points."
+}

@@ -1,0 +1,462 @@
+{
+  "campus": "gt",
+  "name": "Georgia Tech",
+  "shortName": "GT",
+  "city": "Atlanta",
+  "timezone": "America/New_York",
+  "center": [
+    -84.3963,
+    33.7768
+  ],
+  "bounds": [
+    [
+      -84.4105,
+      33.7655
+    ],
+    [
+      -84.3855,
+      33.7915
+    ]
+  ],
+  "osmAreas": [
+    "relation/3341535"
+  ],
+  "sources": {
+    "gt-visitor": {
+      "title": "GT Parking & Transportation — Visitor parking",
+      "url": "https://www.pts.gatech.edu/parking/visitor-parking",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "gt-stingerette": {
+      "title": "GT Parking & Transportation — Stingerette",
+      "url": "https://www.pts.gatech.edu/parking-transportation/shuttles/stingerette",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "gt-stinger": {
+      "title": "GT Parking & Transportation — Stinger buses",
+      "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "gtpd": {
+      "title": "Georgia Tech Police Department",
+      "url": "https://police.gatech.edu/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2027-04-12"
+    },
+    "gt-football-2026": {
+      "title": "2026 Georgia Tech home football dates (AJC, 680 The Fan reporting the ACC schedule)",
+      "url": "https://feeds.ajc.com/sports/2026/01/georgia-tech-football-will-open-the-2026-season-with-three-home-games",
+      "kind": "news",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-30"
+    },
+    "marta-gtfs": {
+      "title": "MARTA GTFS schedule feed",
+      "url": "https://www.itsmarta.com/app-developer-resources.aspx",
+      "kind": "official",
+      "retrieved": "2026-10-04",
+      "reviewBy": "2026-12-11"
+    },
+    "marta-fares": {
+      "title": "MARTA — Fares and passes",
+      "url": "https://itsmarta.com/fare-programs.aspx",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-12-12"
+    }
+  },
+  "parking": {
+    "notes": [
+      "Accessible, reserved and fire-lane spaces are never recommended.",
+      "After 5 p.m. is not free parking at Georgia Tech; only the places below are evaluated."
+    ],
+    "places": [
+      {
+        "id": "gt-W02",
+        "code": "W02",
+        "name": "Student Center Deck",
+        "label": "Visitor Area 3",
+        "kind": "deck",
+        "osm": [
+          "way/43332751"
+        ],
+        "payment": "Pay at exit · debit or credit",
+        "rules": [
+          {
+            "id": "gt-deck-standard",
+            "windows": "all",
+            "audience": "any",
+            "access": "pay",
+            "rate": "gt-deck-standard",
+            "sourceId": "gt-visitor"
+          }
+        ]
+      },
+      {
+        "id": "gt-W23",
+        "code": "W23",
+        "name": "North Deck",
+        "label": "Visitor Area 5",
+        "kind": "deck",
+        "osm": [
+          "way/42796811"
+        ],
+        "payment": "Pay at exit · debit or credit",
+        "rules": [
+          {
+            "id": "gt-deck-standard",
+            "windows": "all",
+            "audience": "any",
+            "access": "pay",
+            "rate": "gt-deck-standard",
+            "sourceId": "gt-visitor"
+          }
+        ]
+      },
+      {
+        "id": "gt-W22",
+        "code": "W22",
+        "name": "Dalney Deck",
+        "label": "Visitor Area 12",
+        "kind": "deck",
+        "osm": [
+          "way/977377067"
+        ],
+        "payment": "Pay at exit · debit or credit",
+        "rules": [
+          {
+            "id": "gt-deck-standard",
+            "windows": "all",
+            "audience": "any",
+            "access": "pay",
+            "rate": "gt-deck-standard",
+            "sourceId": "gt-visitor"
+          }
+        ]
+      },
+      {
+        "id": "gt-E81",
+        "code": "E81",
+        "name": "Tech Square Deck",
+        "label": "Visitor Area 8",
+        "kind": "deck",
+        "osm": [
+          "relation/3321074"
+        ],
+        "payment": "Pay at exit · debit or credit",
+        "rules": [
+          {
+            "id": "gt-deck-techsquare",
+            "windows": "all",
+            "audience": "any",
+            "access": "pay",
+            "rate": "gt-deck-techsquare",
+            "sourceId": "gt-visitor"
+          }
+        ]
+      },
+      {
+        "id": "gt-curran",
+        "code": "Curran",
+        "name": "Curran Deck (rooftop)",
+        "label": "Visitor Area 11 · rooftop only",
+        "kind": "deck",
+        "osm": [
+          "way/42825663"
+        ],
+        "payment": "ParkMobile zone 8634 · debit or credit",
+        "rules": [
+          {
+            "id": "gt-curran-night",
+            "windows": [
+              {
+                "days": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "start": "00:00",
+                "end": "06:00"
+              },
+              {
+                "days": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "start": "20:00",
+                "end": "24:00"
+              }
+            ],
+            "audience": "any",
+            "access": "pay",
+            "rate": {
+              "kind": "flat",
+              "price": 5
+            },
+            "sourceId": "gt-visitor"
+          },
+          {
+            "id": "gt-curran-day",
+            "windows": [
+              {
+                "days": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "start": "06:00",
+                "end": "20:00"
+              }
+            ],
+            "audience": "any",
+            "access": "pay",
+            "rate": {
+              "kind": "hourly",
+              "perHour": 1
+            },
+            "maxStayMin": 240,
+            "sourceId": "gt-visitor"
+          },
+          {
+            "id": "gt-curran-weekend",
+            "windows": [
+              {
+                "days": [
+                  0,
+                  6
+                ],
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ],
+            "audience": "any",
+            "access": "pay",
+            "rate": {
+              "kind": "flat",
+              "price": 5
+            },
+            "sourceId": "gt-visitor"
+          }
+        ]
+      }
+    ],
+    "rates": {
+      "gt-deck-standard": {
+        "kind": "tiered",
+        "tiers": [
+          {
+            "upToMin": 60,
+            "price": 3
+          },
+          {
+            "upToMin": 120,
+            "price": 6
+          },
+          {
+            "upToMin": 180,
+            "price": 9
+          },
+          {
+            "upToMin": 240,
+            "price": 12
+          },
+          {
+            "upToMin": 1440,
+            "price": 15
+          }
+        ],
+        "repeatsAfterMin": 1440
+      },
+      "gt-deck-techsquare": {
+        "kind": "tiered",
+        "tiers": [
+          {
+            "upToMin": 60,
+            "price": 3
+          },
+          {
+            "upToMin": 120,
+            "price": 6
+          },
+          {
+            "upToMin": 180,
+            "price": 10
+          },
+          {
+            "upToMin": 240,
+            "price": 14
+          },
+          {
+            "upToMin": 1440,
+            "price": 18
+          }
+        ],
+        "repeatsAfterMin": 1440
+      }
+    }
+  },
+  "events": [
+    {
+      "id": "gt-fb-2026-10-24",
+      "label": "Home football",
+      "date": "2026-10-24",
+      "start": "00:00",
+      "end": "24:00",
+      "effect": "unknown",
+      "places": "all",
+      "sourceId": "gt-football-2026"
+    },
+    {
+      "id": "gt-fb-2026-11-07",
+      "label": "Home football",
+      "date": "2026-11-07",
+      "start": "00:00",
+      "end": "24:00",
+      "effect": "unknown",
+      "places": "all",
+      "sourceId": "gt-football-2026"
+    },
+    {
+      "id": "gt-fb-2026-11-21",
+      "label": "Home football",
+      "date": "2026-11-21",
+      "start": "00:00",
+      "end": "24:00",
+      "effect": "unknown",
+      "places": "all",
+      "sourceId": "gt-football-2026"
+    }
+  ],
+  "night": [
+    {
+      "id": "gt-stingerette",
+      "name": "Stingerette",
+      "kind": "on_demand",
+      "summary": "Campus to off-campus housing",
+      "eligibility": "GT students and employees with a GT ID",
+      "windows": [
+        {
+          "days": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "start": "16:30",
+          "end": "24:00"
+        }
+      ],
+      "exceptions": "Holidays, semester breaks and home football games may change hours.",
+      "pickup": "Designated pickup points are shown in the booking app; they are not published as data.",
+      "limits": [
+        "No trips between two on-campus locations"
+      ],
+      "handoffs": [
+        {
+          "label": "Open booking",
+          "url": "https://ondemand.transloc.com/"
+        },
+        {
+          "label": "Call dispatch",
+          "url": "tel:+14043857433"
+        }
+      ],
+      "sourceId": "gt-stingerette"
+    },
+    {
+      "id": "gt-yj-vouchers",
+      "name": "Yellow Jacket Vouchers",
+      "kind": "info",
+      "summary": "Late-night option after Stingerette ends",
+      "windows": [
+        {
+          "days": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "start": "00:00",
+          "end": "03:00"
+        }
+      ],
+      "exceptions": "Details are on the Stingerette page.",
+      "handoffs": [
+        {
+          "label": "Details",
+          "url": "https://www.pts.gatech.edu/parking-transportation/shuttles/stingerette"
+        }
+      ],
+      "sourceId": "gt-stingerette"
+    },
+    {
+      "id": "gt-stinger",
+      "name": "Stinger buses",
+      "kind": "tracker",
+      "summary": "Campus buses, including late-night routes",
+      "exceptions": "No public schedule feed, so Crossmetric cannot plan with Stinger yet.",
+      "handoffs": [
+        {
+          "label": "Live tracker",
+          "url": "https://bus.gatech.edu/"
+        }
+      ],
+      "sourceId": "gt-stinger"
+    }
+  ],
+  "help": [
+    {
+      "label": "Georgia Tech Police",
+      "detail": "Emergencies and non-emergencies. 911 from a cell reaches Atlanta Police.",
+      "phone": "+14048942500",
+      "display": "404-894-2500",
+      "sourceId": "gtpd"
+    }
+  ],
+  "transit": {
+    "networks": [
+      "marta"
+    ],
+    "notIncluded": [
+      {
+        "name": "Stinger",
+        "reason": "No current public schedule feed",
+        "url": "https://bus.gatech.edu/"
+      }
+    ],
+    "trackers": [
+      {
+        "agency": "MARTA",
+        "url": "https://www.itsmarta.com/"
+      }
+    ],
+    "calendarOverlay": null,
+    "fares": {
+      "marta": {
+        "oneWay": 2.5,
+        "note": "Up to 4 free transfers in 3 hours",
+        "sourceId": "marta-fares"
+      }
+    }
+  }
+}

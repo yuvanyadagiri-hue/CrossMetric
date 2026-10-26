@@ -1,0 +1,22 @@
+{
+  "name": "crossmetric",
+  "private": true,
+  "description": "CrossMetric — school-road safety intelligence for Georgia.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @crossmetric/web",
+    "build": "npm run build -w @crossmetric/web",
+    "start": "npm run start -w @crossmetric/web",
+    "test": "npm run test -w @crossmetric/engine && npm run test -w @crossmetric/web",
+    "test:e2e": "npm run test:e2e -w @crossmetric/web",
+    "gallery": "npm run gallery -w @crossmetric/web",
+    "typecheck": "npm run typecheck -w @crossmetric/engine && npm run typecheck -w @crossmetric/web",
+    "lint": "npm run lint -w @crossmetric/web"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

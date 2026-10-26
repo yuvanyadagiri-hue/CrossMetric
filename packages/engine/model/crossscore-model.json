@@ -1,0 +1,215 @@
+{
+  "$comment": "CrossScore: route-condition model. Read by packages/engine/src/crossscore.ts. Changing any number requires a version bump and a CHANGELOG entry in docs/METHODOLOGY.md.",
+  "version": "1.0.0",
+  "name": "CrossScore",
+  "released": "2026-10-05",
+  "summary": "CrossScore (0-100) summarizes the transportation conditions along a route from public crash, road and infrastructure data. Higher means fewer risk indicators were found. It is not a prediction and not a promise of personal safety.",
+  "bufferM": 30,
+  "bands": [
+    {
+      "id": "lower",
+      "label": "Lower-risk conditions",
+      "shortLabel": "Lower risk",
+      "min": 75
+    },
+    {
+      "id": "mixed",
+      "label": "Mixed conditions",
+      "shortLabel": "Mixed",
+      "min": 50
+    },
+    {
+      "id": "higher",
+      "label": "Higher-risk conditions",
+      "shortLabel": "Higher risk",
+      "min": 0
+    }
+  ],
+  "factors": [
+    {
+      "id": "crashHistory",
+      "label": "Crash history",
+      "source": "GDOT crash reports (GEARS)",
+      "description": "Reported crashes within 30 m of the route, compared with the average for Georgia roads in the same setting (from quiet areas to dense urban cores, or interstates and freeways)."
+    },
+    {
+      "id": "severeCrashes",
+      "label": "Injury and fatal crashes",
+      "source": "GDOT crash reports (GEARS)",
+      "description": "Crashes with a reported injury or death within 30 m of the route, compared with the average for Georgia roads in the same setting."
+    },
+    {
+      "id": "pedestrianCrashes",
+      "label": "Pedestrian incidents",
+      "source": "GDOT crash reports (GEARS)",
+      "description": "Crashes involving a pedestrian within 30 m of the route, compared with the average for Georgia streets in the same setting."
+    },
+    {
+      "id": "bicycleCrashes",
+      "label": "Bicycle incidents",
+      "source": "GDOT crash reports (GEARS)",
+      "description": "Crashes involving a bicyclist within 30 m of the route, compared with the average for Georgia streets in the same setting."
+    },
+    {
+      "id": "roadSpeed",
+      "label": "Road speed",
+      "source": "OpenStreetMap posted speed limits",
+      "description": "Distance-weighted posted speed limit on the streets the route uses, converted with the pedestrian impact-speed risk curve (Tefft 2011). Only used where at least 30% of street distance has a recorded limit."
+    },
+    {
+      "id": "lanes",
+      "label": "Number of lanes",
+      "source": "GDOT Road Inventory 2025",
+      "description": "Share of the route on or alongside roads with 3 or more through lanes. Wider roads mean longer crossings and more conflict points (FHWA STEP guide, 2018)."
+    },
+    {
+      "id": "trafficVolume",
+      "label": "Traffic volume",
+      "source": "GDOT traffic counts (AADT)",
+      "description": "Daily traffic on the major roads the route uses, scored with the FHWA STEP volume thresholds (9,000 / 12,000 / 15,000 vehicles per day). Local streets are not counted by GDOT and are treated as below 9,000."
+    },
+    {
+      "id": "sidewalks",
+      "label": "Sidewalk availability",
+      "source": "OpenStreetMap",
+      "description": "Share of the walk on footpaths, or on streets where OpenStreetMap records a sidewalk. A street without a recorded sidewalk may still have one, so this is a lower bound."
+    },
+    {
+      "id": "bikeFacilities",
+      "label": "Protected path availability",
+      "source": "OpenStreetMap",
+      "description": "Share of the ride on separated paths or protected lanes (full credit), painted bike lanes (60%) or shared-lane markings (30%)."
+    },
+    {
+      "id": "crossings",
+      "label": "Crossing exposure",
+      "source": "GDOT Road Inventory 2025 and GDOT traffic signals",
+      "description": "How many times the route crosses an arterial or a road with 4+ lanes, and whether a GDOT traffic signal is recorded at the crossing."
+    }
+  ],
+  "crashScale": {
+    "$comment": "Crash factors compare the crashes found along a route with the average for Georgia roads in the same setting (crashes per km x length). score = 100 / (1 + ratio x (100 - averageScore) / averageScore): no crashes = 100, exactly average = 70, twice average = 54, four times = 37.",
+    "averageScore": 70
+  },
+  "modes": {
+    "walk": {
+      "label": "Walk",
+      "crashFocus": "pedestrian",
+      "weights": {
+        "pedestrianCrashes": 3,
+        "crashHistory": 1,
+        "severeCrashes": 1,
+        "roadSpeed": 1.5,
+        "lanes": 1,
+        "trafficVolume": 1,
+        "sidewalks": 1.5,
+        "crossings": 1.5
+      }
+    },
+    "bike": {
+      "label": "Bike",
+      "crashFocus": "bicyclist",
+      "weights": {
+        "bicycleCrashes": 3,
+        "crashHistory": 1,
+        "severeCrashes": 1,
+        "roadSpeed": 1.5,
+        "lanes": 1,
+        "trafficVolume": 1,
+        "bikeFacilities": 2,
+        "crossings": 1
+      }
+    },
+    "drive": {
+      "label": "Drive",
+      "crashFocus": "all",
+      "weights": {
+        "crashHistory": 2,
+        "severeCrashes": 2,
+        "crossings": 1
+      }
+    }
+  },
+  "speedRisk": {
+    "$comment": "Pedestrian risk of death by impact speed, Tefft (2011), AAA Foundation for Traffic Safety: 10% at 23 mph, 25% at 32 mph, 50% at 42 mph, 75% at 50 mph, 90% at 58 mph. Score = 100 x (1 - risk), linear between points.",
+    "mph": [
+      0,
+      23,
+      32,
+      42,
+      50,
+      58
+    ],
+    "risk": [
+      0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "minCoverage": 0.3,
+    "reference": "Tefft, B.C. (2011). Impact Speed and a Pedestrian's Risk of Severe Injury or Death. AAA Foundation for Traffic Safety."
+  },
+  "laneScores": {
+    "$comment": "Score per meter by through lanes; roads not in the GDOT major-road index are local streets with 1-2 lanes.",
+    "upTo2": 100,
+    "three": 70,
+    "fourOrFive": 40,
+    "sixPlus": 15
+  },
+  "volumeScores": {
+    "$comment": "FHWA STEP (2018) volume thresholds.",
+    "below9000": 100,
+    "below12000": 75,
+    "below15000": 55,
+    "below30000": 30,
+    "atLeast30000": 15
+  },
+  "bikeCredit": {
+    "separated": 1,
+    "path": 1,
+    "dedicated": 0.6,
+    "shared": 0.3,
+    "none": 0
+  },
+  "crossingCost": {
+    "walk": {
+      "unsignalized": 15,
+      "signalized": 6
+    },
+    "bike": {
+      "unsignalized": 12,
+      "signalized": 5
+    },
+    "drive": {
+      "unsignalized": 10,
+      "signalized": 4
+    }
+  },
+  "selection": {
+    "$comment": "How the safest, balanced and fastest routes are chosen from the alternatives.",
+    "safestMaxTimeRatio": 1.6,
+    "safestMaxExtraMinutes": 20,
+    "balancedRatioPenalty": 25,
+    "distinctOverlapMax": 0.85
+  },
+  "curb": {
+    "$comment": "Safer pickup and drop-off: curb points within a short walk are compared on the conditions right at the curb.",
+    "maxWalkM": 250,
+    "nearbyM": 50,
+    "weights": {
+      "pedestrianCrashes": 2,
+      "crashHistory": 1,
+      "lanes": 1,
+      "trafficVolume": 1,
+      "roadSpeed": 1
+    },
+    "minImprovement": 5
+  },
+  "confidence": {
+    "$comment": "Share of the mode's total factor weight that had usable data.",
+    "high": 0.85,
+    "moderate": 0.65
+  }
+}

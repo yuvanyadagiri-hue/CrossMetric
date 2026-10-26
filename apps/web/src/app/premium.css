@@ -1,0 +1,389 @@
+/* ==========================================================================
+ * CrossMetric brand layer (2026-10-25 redesign: "Map. Plan. Move.").
+ *
+ * Look: a quiet, map-first navy product. The map is the picture; chrome is solid navy surfaces with
+ * hairline borders, one typeface (Inter Variable, scale in globals.css) and the X mark. Electric lime
+ * is for the one primary action and the selected state, route blue and teal for the map. No glows,
+ * gradients, glass or decorative graphics.
+ *
+ * Imported after globals.css, so these rules refine its tokens and add the shell components.
+ * ========================================================================== */
+
+.cm-stage,
+.cm-app {
+  --brand-navy: #07111f;
+  --brand-deep: #030810;
+  --brand-lime: #91f24d;
+  --brand-blue: #42a5ff;
+  --brand-teal: #30d5c8;
+  --brand-paper: #f5f8fc;
+  /* Older names, kept so remaining markup resolves to the new brand. */
+  --green: var(--brand-lime);
+  --ink: var(--brand-navy);
+  --net-bg: var(--app-bg, #07111f);
+}
+.cm-app {
+  --glyph-cut: var(--app-surface);
+  /* A solid card one step up from the screen (the one answer card, the next-class card). */
+  --app-block: #0d1929;
+  --app-on-block: #f5f8fc;
+  /* Shell geometry. Desktop: a 76 px rail and a 400 px panel to the left of the map. */
+  --cm-rail-w: 76px;
+  --cm-panel-w: 400px;
+  --cm-tabbar-h: 64px;
+}
+@media (min-width: 1280px) {
+  .cm-app {
+    --cm-panel-w: 420px;
+  }
+}
+
+/* ---- Stage: the app fills the window on every screen size --------------------------- */
+.cm-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #07111f;
+}
+.cm-device {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #07111f;
+}
+
+/* ---- Navigation --------------------------------------------------------------------- */
+/* Phone: a solid tab bar flush with the bottom edge (the sheet sits on top of it). */
+.cm-tabbar {
+  background: var(--app-surface);
+  border-top: 1px solid var(--app-line);
+}
+.cm-tab {
+  color: var(--app-muted);
+  transition: color 160ms ease;
+}
+.cm-tab:hover {
+  color: var(--app-ink);
+}
+.cm-tab[aria-current="page"] {
+  color: var(--app-ink);
+}
+.cm-tab-icon {
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+.cm-tab[aria-current="page"] .cm-tab-icon {
+  background: var(--app-accent);
+  color: var(--app-on-accent);
+}
+/* The Report tab carries the brand's one bright mark even when idle: it is the product's purpose. */
+.cm-tab[data-accent]:not([aria-current="page"]) .cm-tab-icon {
+  color: var(--app-accent);
+}
+.cm-app:not([data-theme="dark"]) .cm-tab[data-accent]:not([aria-current="page"]) .cm-tab-icon {
+  color: var(--app-ink);
+}
+
+/* Desktop: a slim rail on the left edge, always navy. */
+.cm-rail {
+  background: #030810;
+  border-right: 1px solid #1b2a3e;
+  color: #9baabd;
+}
+.cm-rail-btn {
+  color: #9baabd;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+.cm-rail-btn:hover {
+  color: #f5f8fc;
+  background: #0d1929;
+}
+.cm-rail-btn[aria-current="page"] {
+  color: #f5f8fc;
+}
+.cm-rail-btn[aria-current="page"] .cm-tab-icon {
+  background: #91f24d;
+  color: #07111f;
+}
+.cm-rail-btn[data-accent]:not([aria-current="page"]) .cm-tab-icon {
+  color: #91f24d;
+}
+
+/* Desktop panel: one column beside the rail; it scrolls, its footer stays put. */
+.cm-panel {
+  background: var(--app-bg);
+  border-right: 1px solid var(--app-line);
+  box-shadow: 8px 0 24px -12px rgb(0 0 0 / 0.5);
+}
+
+/* MapLibre's attribution sits to the right of the desktop panel, not under it. */
+.cm-app[data-layout="desktop"] .maplibregl-ctrl-bottom-left {
+  left: calc(var(--cm-rail-w) + var(--cm-panel-w));
+}
+
+/* ---- Launch screen (server-rendered, pure CSS: it paints with the first byte) -------- */
+.cm-splash {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  background: #07111f;
+  color: #f5f8fc;
+}
+.cm-splash[data-exit="fade"] {
+  animation: cm-splash-out 420ms ease 2400ms forwards;
+}
+.cm-splash[data-leaving] {
+  animation: cm-splash-out 200ms ease forwards;
+}
+@keyframes cm-splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+html[data-cm-intro="off"] .cm-splash {
+  display: none;
+}
+.cm-splash-content {
+  position: absolute;
+  inset: 0;
+}
+.cm-splash-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44%;
+  margin-top: -70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cm-splash-mark {
+  width: 112px;
+  height: 112px;
+  overflow: visible;
+}
+.cm-splash-mark path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cm-draw 620ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.cm-splash-mark path:nth-child(1) {
+  animation-delay: 200ms;
+}
+.cm-splash-mark path:nth-child(2) {
+  animation-delay: 480ms;
+}
+@keyframes cm-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes cm-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.cm-sp-node {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cm-pop-in 380ms cubic-bezier(0.34, 1.5, 0.64, 1) 900ms both;
+}
+.cm-splash-word {
+  margin-top: 28px;
+  font-weight: 650;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: cm-rise-up 640ms cubic-bezier(0.22, 1, 0.36, 1) 1100ms forwards;
+}
+.cm-splash-tag {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #9baabd;
+  opacity: 0;
+  animation: cm-fade-in 520ms ease 1450ms forwards;
+}
+@keyframes cm-rise-up {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes cm-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-splash[data-exit] {
+    animation: cm-splash-out 200ms ease 1100ms forwards;
+  }
+  .cm-splash-mark path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .cm-sp-node,
+  .cm-splash-word,
+  .cm-splash-tag {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- First-run pages ------------------------------------------------------------------ */
+.cm-welcome-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.cm-welcome-track::-webkit-scrollbar {
+  display: none;
+}
+.cm-welcome-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+@keyframes cm-ring {
+  0% {
+    transform: scale(0.45);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+.cm-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--brand-blue);
+  animation: cm-ring 3.2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+.cm-ring:nth-child(2) {
+  animation-delay: 1.05s;
+}
+.cm-ring:nth-child(3) {
+  animation-delay: 2.1s;
+}
+@keyframes cm-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.cm-float {
+  animation: cm-float 4.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-ring,
+  .cm-float {
+    animation: none;
+  }
+}
+
+/* ---- Pages (Account, Services ...): a plain header on the screen colour -------------- */
+.cm-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--app-bg);
+  color: var(--app-ink);
+}
+.cm-sheet-top {
+  position: relative;
+  background: var(--app-bg);
+}
+/* Sections that rise in one after another when Explore first draws. */
+@keyframes cm-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.cm-deal > * {
+  animation: cm-card-in 420ms var(--ease-sheet) both;
+}
+.cm-deal > *:nth-child(2) {
+  animation-delay: 50ms;
+}
+.cm-deal > *:nth-child(3) {
+  animation-delay: 100ms;
+}
+.cm-deal > *:nth-child(n + 4) {
+  animation-delay: 150ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-deal > * {
+    animation: none;
+  }
+}
+
+/* ---- Arrival: a bold full-screen moment (lime is the positive result) ----------------- */
+.cm-arrived {
+  background: #91f24d;
+  color: #07111f;
+}
+@keyframes cm-ring-expand {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.cm-arrived-ring-a {
+  animation: cm-ring-expand 700ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+}
+.cm-arrived-ring-b {
+  animation: cm-ring-expand 700ms cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+}
+.cm-arrived-core {
+  animation: cm-pop 520ms cubic-bezier(0.34, 1.4, 0.64, 1) 380ms both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-arrived-ring-a,
+  .cm-arrived-ring-b,
+  .cm-arrived-core {
+    animation: none;
+  }
+}
+
+/* ---- Help ---------------------------------------------------------------------------- */
+.cm-help[open] > summary {
+  padding-bottom: 6px;
+}
+
+/* A navy card inside a light screen: text, lines and chips inside it use the dark theme's colours. */
+.cm-app .cm-on-dark {
+  --app-ink: #f5f8fc;
+  --app-muted: #9baabd;
+  --app-line: #1b2a3e;
+  --app-line-strong: #2b3d55;
+  --app-chip: #122136;
+  --app-surface: #0d1929;
+  --app-route: #42a5ff;
+  color: var(--app-ink);
+}

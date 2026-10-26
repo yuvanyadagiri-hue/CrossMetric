@@ -1,0 +1,86 @@
+{
+  "updated": "2026-10-12",
+  "note": "A source runs only when its status is \"enabled\". Statuses change only by editing this file after the permission is in place.",
+  "sources": [
+    {
+      "id": "first-party-feedback",
+      "owner": "Crossmetric",
+      "campus": "BOTH",
+      "access": "In-app feedback form with explicit consent",
+      "permittedPurposes": ["Find and prioritize product problems"],
+      "retention": "30 days for minimized text; deletable by the submitter with their deletion code",
+      "rateLimit": "6 submissions per connection per 10 minutes",
+      "status": "enabled",
+      "freshness": "Daily batch",
+      "reason": null
+    },
+    {
+      "id": "reddit-gatech",
+      "owner": "Reddit (r/gatech)",
+      "campus": "GT",
+      "access": "Reddit Data API",
+      "permittedPurposes": [],
+      "retention": "Per Reddit Data API Terms",
+      "rateLimit": "Per Reddit approval",
+      "status": "needs_permission",
+      "freshness": "Daily batch once approved",
+      "reason": "Requires approval under Reddit's Responsible Builder Policy and terms that allow this processing. Not requested."
+    },
+    {
+      "id": "reddit-uga",
+      "owner": "Reddit (r/UGA)",
+      "campus": "UGA",
+      "access": "Reddit Data API",
+      "permittedPurposes": [],
+      "retention": "Per Reddit Data API Terms",
+      "rateLimit": "Per Reddit approval",
+      "status": "needs_permission",
+      "freshness": "Daily batch once approved",
+      "reason": "Requires approval under Reddit's Responsible Builder Policy and terms that allow this processing. Not requested."
+    },
+    {
+      "id": "discord-feedback",
+      "owner": "Campus Discord servers",
+      "campus": "BOTH",
+      "access": "Voluntary /feedback command or a link to the Crossmetric form",
+      "permittedPurposes": ["Feedback the person submits themselves"],
+      "retention": "Same as first-party feedback",
+      "rateLimit": "Per server rules",
+      "status": "disabled",
+      "reason": "No server has authorized a feedback command. Channel histories are never mined."
+    },
+    {
+      "id": "official-alerts-gt",
+      "owner": "Georgia Tech Parking & Transportation",
+      "campus": "GT",
+      "access": "Low-rate retrieval of public alert pages with change detection",
+      "permittedPurposes": ["Corroborate reported problems"],
+      "retention": "Effective dates and links only",
+      "rateLimit": "At most hourly",
+      "status": "disabled",
+      "reason": "Connector not built yet; alerts are entered into data/commute by hand after verification."
+    },
+    {
+      "id": "official-alerts-uga",
+      "owner": "UGA Transportation & Parking",
+      "campus": "UGA",
+      "access": "Low-rate retrieval of public alert pages with change detection",
+      "permittedPurposes": ["Corroborate reported problems"],
+      "retention": "Effective dates and links only",
+      "rateLimit": "At most hourly",
+      "status": "disabled",
+      "reason": "Connector not built yet; alerts are entered into data/commute by hand after verification."
+    },
+    {
+      "id": "pilot-interviews",
+      "owner": "Crossmetric pilot",
+      "campus": "BOTH",
+      "access": "Opt-in research notes",
+      "permittedPurposes": ["Usability and estimation research"],
+      "retention": "Per the pilot's consent form",
+      "rateLimit": "n/a",
+      "status": "disabled",
+      "reason": "No pilot has been run. Interviews are never simulated."
+    }
+  ]
+}

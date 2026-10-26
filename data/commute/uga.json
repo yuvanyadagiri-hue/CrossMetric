@@ -1,0 +1,537 @@
+{
+  "campus": "uga",
+  "name": "UGA",
+  "shortName": "UGA",
+  "city": "Athens",
+  "timezone": "America/New_York",
+  "center": [
+    -83.3755,
+    33.9452
+  ],
+  "bounds": [
+    [
+      -83.412,
+      33.918
+    ],
+    [
+      -83.34,
+      33.97
+    ]
+  ],
+  "osmAreas": [
+    "relation/21071510",
+    "way/186177066"
+  ],
+  "sources": {
+    "uga-enforcement": {
+      "title": "UGA Transportation & Parking — Enforcement hours",
+      "url": "https://tps.uga.edu/parking/enforcement/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "uga-visitors": {
+      "title": "UGA Transportation & Parking — Visitor parking",
+      "url": "https://tps.uga.edu/parking/visitors/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "uga-park-ride": {
+      "title": "UGA Transportation & Parking — Park & Ride (facility and rate only; route names and the bridge notice on this page are out of date)",
+      "url": "https://tps.uga.edu/parking/park-ride/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "uga-routes": {
+      "title": "UGA Transportation & Parking — Routes & schedules (service calendar)",
+      "url": "https://tps.uga.edu/transit/routes-schedules/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-10-31"
+    },
+    "uga-ride-smart": {
+      "title": "UGA Ride Smart",
+      "url": "https://tps.uga.edu/navigating-campus/uga-ride-smart/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-12"
+    },
+    "uga-police": {
+      "title": "UGA Police — Contact",
+      "url": "https://police.uga.edu/contact/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2027-04-12"
+    },
+    "uga-football-2026": {
+      "title": "2026 UGA home football dates (WRDW / Atlanta News First reporting the UGA schedule release)",
+      "url": "https://www.wrdw.com/2025/12/12/uga-football-releases-2026-schedule/",
+      "kind": "news",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-11-30"
+    },
+    "uga-gtfs": {
+      "title": "UGA Campus Transit GTFS (Passio)",
+      "url": "https://passio3.com/uga/passioTransit/gtfs/google_transit.zip",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-10-19"
+    },
+    "acc-gtfs": {
+      "title": "Athens-Clarke County Transit GTFS",
+      "url": "https://bustracker.accgov.com/InfoPoint/GTFS-Zip.ashx",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2026-12-31"
+    },
+    "uga-transit": {
+      "title": "UGA Transportation & Parking — Campus Transit (fare free and open to the public)",
+      "url": "https://tps.uga.edu/transit/",
+      "kind": "official",
+      "retrieved": "2026-10-12",
+      "reviewBy": "2027-01-12"
+    }
+  },
+  "parking": {
+    "notes": [
+      "Accessible, reserved, state-vehicle and fire-lane spaces are enforced 24/7 and are never recommended.",
+      "A registered vehicle is not the same as a permit. Registration is free and needs no permit."
+    ],
+    "lotCategories": {
+      "sourceId": "uga-enforcement",
+      "weekdayPermitOnly": {
+        "start": "07:00",
+        "end": "17:00"
+      },
+      "afterHours": {
+        "start": "17:00",
+        "end": "24:00"
+      },
+      "registeredAfterHours": [
+        "1PP",
+        "N02",
+        "N03",
+        "N04",
+        "N05",
+        "N06",
+        "N11",
+        "N13",
+        "TSL",
+        "S11",
+        "S15",
+        "W16",
+        "W17",
+        "E04",
+        "E20"
+      ],
+      "permitOnlyAfterHours": [
+        "N10",
+        "W02",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "E05",
+        "E24"
+      ],
+      "anyVehicleAfterHours": [
+        "N01",
+        "N07",
+        "N08",
+        "N09",
+        "N12",
+        "S01",
+        "HSC",
+        "W03",
+        "W05",
+        "W06",
+        "W07",
+        "W12",
+        "W13",
+        "W14",
+        "W15",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S12",
+        "S13",
+        "S14",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "E01",
+        "E02",
+        "E03",
+        "E06",
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E12",
+        "E13",
+        "E14",
+        "E15",
+        "E21",
+        "E23",
+        "E25",
+        "E26",
+        "SSB",
+        "CSC",
+        "VMC"
+      ],
+      "payPerHourAfterFive": [
+        "N02",
+        "N03",
+        "N04",
+        "N05",
+        "N13",
+        "W16",
+        "W17"
+      ],
+      "weekendEnforced": {
+        "lots": [
+          "N02",
+          "N03",
+          "N04",
+          "N05",
+          "N13",
+          "W16",
+          "W17"
+        ],
+        "start": "07:00",
+        "end": "23:00"
+      },
+      "earlyStart": {
+        "TSL": "04:00"
+      },
+      "gates": {
+        "E24": {
+          "open": "06:00",
+          "close": "19:00"
+        }
+      }
+    },
+    "decks": [
+      {
+        "code": "N06",
+        "name": "North Campus Deck",
+        "osmName": "North Campus Parking Deck",
+        "rate": "uga-visitor-deck",
+        "restrictedMornings": false
+      },
+      {
+        "code": "S11",
+        "name": "South Campus Deck",
+        "osmName": "South Campus Parking Deck",
+        "rate": "uga-visitor-deck",
+        "restrictedMornings": false
+      },
+      {
+        "code": "N11",
+        "name": "Tate Center Deck",
+        "osmName": "Tate Center Parking Deck",
+        "rate": "uga-visitor-deck",
+        "restrictedMornings": false
+      },
+      {
+        "code": "E20",
+        "name": "Performing Arts Center Deck",
+        "osmName": "Perfoming Arts Center Deck",
+        "rate": "uga-visitor-deck",
+        "restrictedMornings": true
+      },
+      {
+        "code": "S15",
+        "name": "Carlton St. Deck",
+        "osmName": "Carlton Street Deck",
+        "rate": "uga-visitor-deck",
+        "restrictedMornings": true
+      },
+      {
+        "code": "E04",
+        "name": "East Campus Deck",
+        "osmName": "East Campus Parking Deck",
+        "rate": "uga-east-deck",
+        "restrictedMornings": false
+      },
+      {
+        "code": "W05",
+        "name": "Hull St. Deck",
+        "osmName": "Hull Street Parking Deck",
+        "rate": "uga-visitor-deck",
+        "restrictedMornings": true
+      }
+    ],
+    "remoteDaily": {
+      "lots": [
+        "E25",
+        "E23",
+        "E26",
+        "S26"
+      ],
+      "price": 5,
+      "payment": "ParkMobile",
+      "sourceId": "uga-visitors"
+    },
+    "parkAndRide": {
+      "lots": [
+        "E23",
+        "E26"
+      ],
+      "permitMonthly": 10,
+      "sourceId": "uga-park-ride"
+    },
+    "rates": {
+      "uga-visitor-deck": {
+        "kind": "tiered",
+        "tiers": [
+          {
+            "upToMin": 30,
+            "price": 1.5
+          },
+          {
+            "upToMin": 60,
+            "price": 4.5
+          },
+          {
+            "upToMin": 120,
+            "price": 7.5
+          }
+        ],
+        "thenPerHour": 1.5,
+        "dailyMax": 15,
+        "repeatsAfterMin": 1440
+      },
+      "uga-east-deck": {
+        "kind": "tiered",
+        "tiers": [
+          {
+            "upToMin": 30,
+            "price": 1
+          },
+          {
+            "upToMin": 60,
+            "price": 3
+          },
+          {
+            "upToMin": 120,
+            "price": 5
+          }
+        ],
+        "thenPerHour": 1,
+        "dailyMax": 10,
+        "repeatsAfterMin": 1440
+      }
+    },
+    "extraPlaces": [
+      {
+        "code": "E23",
+        "name": "College Station Park & Ride",
+        "osm": [
+          "relation/17410415",
+          "relation/21233475"
+        ]
+      },
+      {
+        "code": "S26",
+        "name": "University Village Park & Ride",
+        "osm": [
+          "relation/20083801"
+        ]
+      }
+    ]
+  },
+  "events": [
+    {
+      "id": "uga-fb-2026-10-17",
+      "label": "Home football",
+      "date": "2026-10-17",
+      "eveFrom": "17:00",
+      "start": "00:00",
+      "end": "24:00",
+      "effect": "unknown",
+      "places": "all",
+      "sourceId": "uga-football-2026"
+    },
+    {
+      "id": "uga-fb-2026-11-14",
+      "label": "Home football",
+      "date": "2026-11-14",
+      "eveFrom": "17:00",
+      "start": "00:00",
+      "end": "24:00",
+      "effect": "unknown",
+      "places": "all",
+      "sourceId": "uga-football-2026"
+    },
+    {
+      "id": "uga-fb-2026-11-28",
+      "label": "Home football",
+      "date": "2026-11-28",
+      "eveFrom": "17:00",
+      "start": "00:00",
+      "end": "24:00",
+      "effect": "unknown",
+      "places": "all",
+      "sourceId": "uga-football-2026"
+    }
+  ],
+  "night": [
+    {
+      "id": "uga-night-buses",
+      "name": "Night buses",
+      "kind": "transit",
+      "summary": "Campus Housing, North-South and Milledge night routes",
+      "routes": [
+        "C-N",
+        "D-N",
+        "M-N"
+      ],
+      "handoffs": [
+        {
+          "label": "Live tracker",
+          "url": "https://routes.uga.edu/"
+        }
+      ],
+      "sourceId": "uga-gtfs"
+    },
+    {
+      "id": "uga-ride-smart",
+      "name": "UGA Ride Smart",
+      "kind": "discount_rideshare",
+      "summary": "50% off Lyft, up to $7.50 a ride, 4 rides a month",
+      "eligibility": "Students registered for classes this semester, 18+, invited by UGA email",
+      "windows": [
+        {
+          "days": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "start": "18:00",
+          "end": "24:00"
+        },
+        {
+          "days": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "start": "00:00",
+          "end": "06:00"
+        }
+      ],
+      "limits": [
+        "Ride must start or end on the main campus, Health Sciences Campus, Veterinary Complex, or one block north of the Arch"
+      ],
+      "handoffs": [
+        {
+          "label": "Open Lyft",
+          "url": "https://lyft.com/ride"
+        },
+        {
+          "label": "Program details",
+          "url": "https://tps.uga.edu/navigating-campus/uga-ride-smart/"
+        }
+      ],
+      "sourceId": "uga-ride-smart"
+    }
+  ],
+  "help": [
+    {
+      "label": "Emergency",
+      "detail": "",
+      "phone": "911",
+      "display": "911",
+      "sourceId": "uga-police"
+    },
+    {
+      "label": "UGA Police (non-emergency)",
+      "detail": "",
+      "phone": "+17065422200",
+      "display": "706-542-2200",
+      "sourceId": "uga-police"
+    }
+  ],
+  "transit": {
+    "networks": [
+      "uga",
+      "acc"
+    ],
+    "notIncluded": [],
+    "trackers": [
+      {
+        "agency": "UGA Campus Transit",
+        "url": "https://routes.uga.edu/"
+      },
+      {
+        "agency": "Athens-Clarke County Transit",
+        "url": "https://bustracker.accgov.com/InfoPoint/"
+      }
+    ],
+    "calendarOverlay": {
+      "agency": "uga",
+      "sourceId": "uga-routes",
+      "publishedThrough": "2026-10-31",
+      "dates": [
+        {
+          "date": "2026-10-03",
+          "status": "modified",
+          "label": "Modified schedule"
+        },
+        {
+          "date": "2026-10-17",
+          "status": "modified",
+          "label": "Modified schedule"
+        },
+        {
+          "date": "2026-10-30",
+          "status": "reduced",
+          "label": "Reduced service"
+        },
+        {
+          "date": "2026-10-31",
+          "status": "none",
+          "label": "No service"
+        }
+      ]
+    },
+    "fares": {
+      "uga": {
+        "oneWay": 0,
+        "note": "Fare free",
+        "sourceId": "uga-transit"
+      },
+      "acc": {
+        "oneWay": 0,
+        "note": "Fare free (GTFS fare $0.00)",
+        "sourceId": "acc-gtfs"
+      }
+    }
+  }
+}

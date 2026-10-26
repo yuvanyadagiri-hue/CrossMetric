@@ -1,0 +1,40 @@
+{
+  "name": "@crossmetric/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/copy-maplibre-worker.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "gallery": "node scripts/capture-gallery.mjs"
+  },
+  "dependencies": {
+    "@crossmetric/engine": "*",
+    "ical.js": "^2.2.1",
+    "lucide-react": "^1.52.0",
+    "maplibre-gl": "^6.12.0",
+    "motion": "13.4.6",
+    "next": "16.3.8",
+    "postgres": "^3.4.9",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "tailwindcss": "^4.3.3",
+    "typescript": "5.9.3",
+    "vitest": "^5.0.3"
+  }
+}

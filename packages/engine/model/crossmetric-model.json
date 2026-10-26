@@ -1,0 +1,200 @@
+{
+  "$comment": "Single source of truth for the CrossMetric Priority for Review model. Read by the Python pipeline (pipeline/scoring/model.py) and the TypeScript engine (packages/engine/src/model.ts). Changing any number here requires a version bump and a CHANGELOG entry in docs/METHODOLOGY.md.",
+  "version": "1.0.0",
+  "name": "CrossMetric Priority for Review",
+  "released": "2026-10-03",
+  "normalization": {
+    "method": "empirical-percentile",
+    "population": "All candidate locations inside the selected school's analysis radius.",
+    "formula": "score(v) = 100 * (number of candidates with value <= v) / N",
+    "zeroEvidenceRule": "For evidence components, a candidate with zero matching crashes scores 0. Absence of observed crashes contributes no priority, rather than the percentile of a large tie at zero.",
+    "reference": "OECD/JRC (2008), Handbook on Constructing Composite Indicators, sections 5 (normalisation) and 6 (weighting)."
+  },
+  "components": [
+    {
+      "id": "crash",
+      "label": "Crash Evidence",
+      "kind": "evidence",
+      "measure": "crashes",
+      "unit": "crashes",
+      "direction": "higher-is-priority",
+      "description": "Number of reported crashes matched to this location in the analysis period (after the crash filter)."
+    },
+    {
+      "id": "injury",
+      "label": "Injury Evidence",
+      "kind": "evidence",
+      "measure": "injuryCrashes",
+      "unit": "crashes",
+      "direction": "higher-is-priority",
+      "description": "Matched crashes with at least one reported injury or fatality."
+    },
+    {
+      "id": "pedestrian",
+      "label": "Pedestrian Evidence",
+      "kind": "evidence",
+      "measure": "pedestrianCrashes",
+      "unit": "crashes",
+      "direction": "higher-is-priority",
+      "description": "Matched crashes in which a recorded unit was a pedestrian."
+    },
+    {
+      "id": "traffic",
+      "label": "Traffic Context",
+      "kind": "context",
+      "measure": "aadt",
+      "unit": "vehicles/day",
+      "direction": "higher-is-priority",
+      "missing": "exclude-and-reweight",
+      "description": "GDOT Annual Average Daily Traffic: vehicles passing a mid-block location, or the sum of the crossing roads' AADT at an intersection."
+    },
+    {
+      "id": "proximity",
+      "label": "School Proximity",
+      "kind": "context",
+      "measure": "distanceM",
+      "unit": "meters",
+      "direction": "lower-is-priority",
+      "description": "Straight-line distance from the school's NCES location to the nearest point of the candidate."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "standard",
+      "label": "Standard (Balanced)",
+      "description": "Equal weights. With no empirical basis for ranking one indicator above another, equal weighting is the transparent default.",
+      "weights": {
+        "crash": 1,
+        "injury": 1,
+        "pedestrian": 1,
+        "traffic": 1,
+        "proximity": 1
+      }
+    },
+    {
+      "id": "pedestrian",
+      "label": "Pedestrian emphasis",
+      "description": "Doubles the weight of pedestrian-involved crash evidence.",
+      "weights": {
+        "crash": 1,
+        "injury": 1,
+        "pedestrian": 2,
+        "traffic": 1,
+        "proximity": 1
+      }
+    },
+    {
+      "id": "injury",
+      "label": "Injury emphasis",
+      "description": "Doubles the weight of injury and fatal crash evidence.",
+      "weights": {
+        "crash": 1,
+        "injury": 2,
+        "pedestrian": 1,
+        "traffic": 1,
+        "proximity": 1
+      }
+    },
+    {
+      "id": "crash",
+      "label": "Crash-history emphasis",
+      "description": "Doubles the weight of total crash evidence.",
+      "weights": {
+        "crash": 2,
+        "injury": 1,
+        "pedestrian": 1,
+        "traffic": 1,
+        "proximity": 1
+      }
+    }
+  ],
+  "scenarioRationale": "Emphasis scenarios are not claims about which indicator matters most. They are deliberate, declared perturbations of the Standard weights, used to test whether a location's priority depends on one assumption (sensitivity analysis).",
+  "combination": {
+    "formula": "priority = sum(w_i * s_i) / sum(w_i), over components with available data",
+    "rounding": "Scores are kept at full precision for ranking and displayed rounded to the nearest integer.",
+    "tieBreak": [
+      "priority desc",
+      "crashes desc",
+      "distanceM asc",
+      "id asc"
+    ]
+  },
+  "bands": [
+    {
+      "id": "high",
+      "label": "High Priority for Review",
+      "shortLabel": "High",
+      "min": 80
+    },
+    {
+      "id": "elevated",
+      "label": "Elevated Priority",
+      "shortLabel": "Elevated",
+      "min": 60
+    },
+    {
+      "id": "moderate",
+      "label": "Moderate Priority",
+      "shortLabel": "Moderate",
+      "min": 40
+    },
+    {
+      "id": "lower",
+      "label": "Lower Priority",
+      "shortLabel": "Lower",
+      "min": 0
+    }
+  ],
+  "stability": {
+    "method": "rank-range",
+    "definition": "spread = (worst rank) - (best rank) across all scenarios. Stability is High when spread <= max(2, 10% of N), Moderate when spread <= max(4, 25% of N), otherwise Low. N = candidates in the analysis.",
+    "high": {
+      "minPositions": 2,
+      "shareOfCandidates": 0.1
+    },
+    "moderate": {
+      "minPositions": 4,
+      "shareOfCandidates": 0.25
+    }
+  },
+  "planner": {
+    "coverageRadiusM": 100,
+    "definition": "When filling review slots in priority order, a candidate is skipped if it lies within coverageRadiusM of an already-selected location on a shared road, because one professional review would naturally cover both."
+  },
+  "periods": [
+    {
+      "id": 1,
+      "label": "Most recent 12 months",
+      "months": 12
+    },
+    {
+      "id": 3,
+      "label": "Full data window (about 3 years)",
+      "months": 36
+    }
+  ],
+  "radii": [
+    400,
+    800,
+    1200
+  ],
+  "crashFilters": [
+    {
+      "id": "all",
+      "label": "All crashes"
+    },
+    {
+      "id": "injury",
+      "label": "Injury or fatal crashes"
+    },
+    {
+      "id": "pedestrian",
+      "label": "Pedestrian-involved crashes"
+    },
+    {
+      "id": "lowLight",
+      "label": "Low-light crashes (dawn, dusk, dark)"
+    }
+  ],
+  "periodRationale": "GDOT's public crash layer is a rolling window of roughly three years, so a five-year period is not offered. The window ends on the last month GDOT has fully loaded."
+}
